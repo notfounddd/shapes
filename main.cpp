@@ -5,46 +5,59 @@ class Shape {
 protected:
     int lenth;
     int width;
-
-public:
-    void SetLenth(int lenth) {
-        this->lenth = lenth;
-    }
-
-    void SetWidth(int width) {
-        this->width = width;
-    }
+    int radius;
+    double corner;
 };
 
-class Rectangle : public Shape {
+class Rectangle : private Shape {
 public:
     int GetArea() {
         return width * lenth;
     }
+    Rectangle(int lenth,int width);
 };
 
-class Circle : public Shape {
-private:
-    int radius;
-public:
-    void SetRadius(int radius) {
-        this->radius = radius;
-    }
+Rectangle::Rectangle(int lenth, int width) {
+    this -> lenth = lenth;
+    this -> width = width;
+}
 
+class Triangle : protected Shape {
+public:
+    float GetArea(){
+        double Corner = corner*M_PI/180;
+        return (width*lenth*sin(Corner))/2;
+    }
+    Triangle(int lenth,int width,int corner);
+};
+
+Triangle::Triangle(int lenth, int width, int corner) {
+    this -> lenth = lenth;
+    this -> width = width;
+    this ->  corner = corner;
+}
+
+class Circle : public Shape {
+public:
     float GetArea() {
         return M_PI * radius * radius;
     }
+    Circle(int radius);
 };
+
+Circle::Circle(int radius) {
+    this ->  radius = radius;
+}
 
 int main() {
     //for rectangle
-    Rectangle r;
-    r.SetLenth(3);
-    r.SetWidth(4);
+    Rectangle r(1,1);
     std::cout << r.GetArea() << std::endl;
+    //for triangle
+    Triangle t(10,4,40);
+    std::cout << t.GetArea() << std::endl;
     //for circle
-    Circle c;
-    c.SetRadius(4);
+    Circle c(6);
     std::cout << c.GetArea() << std::endl;
     return 0;
 }
