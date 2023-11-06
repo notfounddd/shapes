@@ -1,35 +1,50 @@
 #include <iostream>
+#include <cmath>
 
 class Shape {
+protected:
+    int lenth;
+    int width;
+
 public:
-    void show() {
-        std::cout << "Its Shape" << std::endl;
+    void SetLenth(int lenth) {
+        this->lenth = lenth;
+    }
+
+    void SetWidth(int width) {
+        this->width = width;
     }
 };
 
 class Rectangle : public Shape {
 public:
-    void show() {
-        std::cout << "Its Rectangle" << std::endl;
+    int GetArea() {
+        return width * lenth;
     }
 };
 
 class Circle : public Shape {
+private:
+    int radius;
 public:
-    void show() {
-        std::cout << "Its Circle" << std::endl;
+    void SetRadius(int radius) {
+        this->radius = radius;
+    }
+
+    float GetArea() {
+        return M_PI * radius * radius;
     }
 };
 
 int main() {
-
-    Shape shape;
-    Rectangle rectangle;
-    Circle circle;
-
-    shape.show();
-    rectangle.show();
-    circle.show();
-
+    //for rectangle
+    Rectangle r;
+    r.SetLenth(3);
+    r.SetWidth(4);
+    std::cout << r.GetArea() << std::endl;
+    //for circle
+    Circle c;
+    c.SetRadius(4);
+    std::cout << c.GetArea() << std::endl;
     return 0;
 }
